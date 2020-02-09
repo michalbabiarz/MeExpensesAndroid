@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Wydatki</string>
+    <string name="tab_text_1">Nowy wydatek</string>
+    <string name="tab_text_2">Bieżące wydatki</string>
+</resources>
