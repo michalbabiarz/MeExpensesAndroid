@@ -30,16 +30,10 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
-            String s = "";
 
             @Override
             public void onClick(View view) {
-                int selectedTab = tabs.getSelectedTabPosition();
-                Fragment activeFragment = expensesFragmentPagerPagerAdapter.getItem(selectedTab);
-                String s = activeFragment.getClass().getName();
-
-
-                switch(selectedTab) {
+                switch(tabs.getSelectedTabPosition()) {
                     case 0:
                         Fragment addExpenseFragment = expensesFragmentPagerPagerAdapter.getItem(0);
 
@@ -50,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                // File file = new File("/mnt/sdcard/Download/Budget.xlsm");
-                Snackbar.make(view, "Replace with your own action " + tabs.getSelectedTabPosition() + "" + s, Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Complete button handling action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
