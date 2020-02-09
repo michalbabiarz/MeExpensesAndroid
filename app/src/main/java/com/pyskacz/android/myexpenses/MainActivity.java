@@ -4,6 +4,8 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,11 +30,27 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
+            String s = "";
+
             @Override
             public void onClick(View view) {
-//                expensesFragmentPagerPagerAdapter.getItem(tabs.getSelectedTabPosition()).
+                int selectedTab = tabs.getSelectedTabPosition();
+                Fragment activeFragment = expensesFragmentPagerPagerAdapter.getItem(selectedTab);
+                String s = activeFragment.getClass().getName();
+
+
+                switch(selectedTab) {
+                    case 0:
+                        Fragment addExpenseFragment = expensesFragmentPagerPagerAdapter.getItem(0);
+
+                    case 1:
+                        Fragment expenseLitFragment = expensesFragmentPagerPagerAdapter.getItem(1);
+                        getSupportFragmentManager().beginTransaction().detach(expenseLitFragment).attach(expenseLitFragment).commit();
+                        break;
+                }
+
                // File file = new File("/mnt/sdcard/Download/Budget.xlsm");
-                Snackbar.make(view, "Replace with your own action " + tabs.getSelectedTabPosition(), Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own action " + tabs.getSelectedTabPosition() + "" + s, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
