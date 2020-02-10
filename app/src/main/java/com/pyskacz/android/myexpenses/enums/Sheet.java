@@ -1,8 +1,7 @@
 package com.pyskacz.android.myexpenses.enums;
 
 public enum Sheet {
-    //TODO: fix CURRENT_MONTH to dynamic
-
+    //TODO: fix CURRENT_MONTH to dynamic, waht when i get new salaty
     CURRENT_MONTH("02.2020"),
     SETTINGS("Ustawienia");
 

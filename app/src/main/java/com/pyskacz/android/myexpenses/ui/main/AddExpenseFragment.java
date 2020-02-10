@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.pyskacz.android.myexpenses.R;
 
 public class AddExpenseFragment extends Fragment {
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
 //    private PageViewModel pageViewModel;
 //
@@ -38,8 +37,7 @@ public class AddExpenseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_add_expense, container, false);
-        final TextView textView = root.findViewById(R.id.section_label);
-        textView.setText("Dodać formularz");
+
 //        pageViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
 //            public void onChanged(@Nullable String s) {
