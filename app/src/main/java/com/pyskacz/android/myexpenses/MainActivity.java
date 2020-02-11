@@ -69,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
 //                            Collection<Expense> exspenses = expenseService.findAllExpenses();
 
                           expenseService.findAllExpenses().forEach(e -> Toast.makeText(getApplication(), e.getDate() + " " + e.getAmount() +" "+ e.getCategory()+" "+ e.getSubcategory(), Toast.LENGTH_SHORT).show());
-                            Thread.sleep(500);
-                        } catch (ExpenseServiceException | InterruptedException e) {
+                        } catch (ExpenseServiceException e) {
                             e.printStackTrace();
                         }
                     case 1:

@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="-10dp">
     <TextView
-        android:id="@+id/expenseText1"
+        android:id="@+id/listItemDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_horizontal_margin"
         android:layout_alignParentLeft="true"
-        android:layout_marginRight="10dp"
-        android:text="expenseText1"
-        android:textColor="#000" />
+        android:layout_centerInParent="true"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Date"
+        android:textSize="20dp"
+        android:textColor="@color/design_default_color_primary_dark" />
 
     <TextView
-        android:id="@+id/expenseText2"
+        android:id="@+id/listItemAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/activity_horizontal_margin"
         android:layout_alignParentRight="true"
-        android:text="expenseText2"
-        android:textColor="#000" />
-</RelativeLayout>
+        android:text="amount"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="@color/colorIncome" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/listItemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-30dp"
+
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Category > subcategory > type" />
+    <TextView
+        android:id="@+id/listItemComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-30dp"
+        android:layout_marginBottom="-10dp"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Comment" />
+</LinearLayout>

@@ -31,7 +31,7 @@ public class ExpenseListFragment extends ListFragment {
         }
 
         String[] keys = {"text1", "text2"};
-        int[] values = {R.id.expenseText1, R.id.expenseText2};
+        int[] values = {R.id.listItemDate, R.id.listItemAmount};
 
         SimpleAdapter adapter = new SimpleAdapter(getActivity(), expensesList, R.layout.widget_expense_list_item, keys, values);
         setListAdapter(adapter);
