@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    private IExpenseService expenseService = new XlsmExpenseService();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,27 +56,17 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View view) {
                 switch(tabs.getSelectedTabPosition()) {
                     case 0:
                         Fragment addExpenseFragment = expensesFragmentPagerPagerAdapter.getItem(0);
-                        try {
-
-//                            Collection<Expense> exspenses = expenseService.findAllExpenses();
-
-                          expenseService.findAllExpenses().forEach(e -> Toast.makeText(getApplication(), e.getDate() + " " + e.getAmount() +" "+ e.getCategory()+" "+ e.getSubcategory(), Toast.LENGTH_SHORT).show());
-                        } catch (ExpenseServiceException e) {
-                            e.printStackTrace();
-                        }
                     case 1:
                         Fragment expenseLitFragment = expensesFragmentPagerPagerAdapter.getItem(1);
                         getSupportFragmentManager().beginTransaction().detach(expenseLitFragment).attach(expenseLitFragment).commit();
                         break;
                 }
 
-               // File file = new File("/mnt/sdcard/Download/Budget.xlsm");
                 Snackbar.make(view, "Complete button handling action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }

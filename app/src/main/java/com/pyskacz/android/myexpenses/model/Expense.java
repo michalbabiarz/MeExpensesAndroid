@@ -1,6 +1,7 @@
 package com.pyskacz.android.myexpenses.model;
 
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,8 +20,7 @@ public class Expense {
     private final String type;
     private final String comment;
 
-    public static Expense fromString(String expenseSetring) {
-        String[] tokens = expenseSetring.split(",");
-        return new Expense(tokens[0],tokens[1], tokens[2],tokens[3],"","");
+    public static Expense fromArray(String[] params) {
+        return new Expense(params[0],params[1], params[2],params[3],params[4],params[5]);
     }
 }
