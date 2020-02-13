@@ -7,11 +7,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
 
-import com.google.inject.Guice;
 import com.pyskacz.android.myexpenses.R;
 import com.pyskacz.android.myexpenses.model.Expense;
 import com.pyskacz.android.myexpenses.service.ExpenseServiceException;
-import com.pyskacz.android.myexpenses.service.ExpenseServiceModule;
 import com.pyskacz.android.myexpenses.service.IExpenseService;
 import com.pyskacz.android.myexpenses.service.XlsmExpenseService;
 
@@ -23,10 +21,6 @@ import java.util.HashMap;
 
 public class ExpenseListFragment extends ListFragment {
 
-    String[] text1 = {"left_1", "left_2", "left_3", "left_4", "left_5", "left_6"};
-    String[] text2 = {"right_1", "right_2", "right_3", "right_4", "right_5", "right_6"};
-
-    private static int counter = 0;
     private IExpenseService expenseService = new XlsmExpenseService();
 
     @Override
