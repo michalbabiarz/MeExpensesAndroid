@@ -46,4 +46,14 @@ dependencies {
         exclude module: 'stax2-api-4.1'
     }
     compileOnly 'org.projectlombok:lombok:1.18.12'
+    implementation ('com.onedrive.sdk:onedrive-sdk-android:1.3+') {
+        transitive = false
+    }
+
+    // Include the gson dependency
+    implementation ('com.google.code.gson:gson:2.3.1')
+
+    // Include supported authentication methods for your application
+    implementation ('com.microsoft.services.msa:msa-auth:0.8.+')
+    implementation ('com.microsoft.aad:adal:1.1.+')
 }
