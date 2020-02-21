@@ -8,9 +8,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import com.pyskacz.android.myexpenses.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class ExpensesFragmentPagerAdapter extends FragmentPagerAdapter {
 
@@ -18,11 +15,11 @@ public class ExpensesFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[] {R.string.tab_text_1, R.string.tab_text_2};
-    private final Context mContext;
+    private final Context context;
 
     public ExpensesFragmentPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
-        mContext = context;
+        this.context = context;
     }
 
     @Override
@@ -33,11 +30,11 @@ public class ExpensesFragmentPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return mContext.getResources().getString(TAB_TITLES[position]);
+        return context.getResources().getString(TAB_TITLES[position]);
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return fragments.length;
     }
 }

@@ -3,6 +3,7 @@ package com.pyskacz.android.myexpenses;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -13,18 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-import android.widget.Toast;
-
-import com.pyskacz.android.myexpenses.model.Expense;
-import com.pyskacz.android.myexpenses.service.ExpenseServiceException;
-import com.pyskacz.android.myexpenses.service.IExpenseService;
-import com.pyskacz.android.myexpenses.service.XlsmExpenseService;
 import com.pyskacz.android.myexpenses.ui.main.ExpensesFragmentPagerAdapter;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,22 +44,18 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                switch(tabs.getSelectedTabPosition()) {
-                    case 0:
-                        Fragment addExpenseFragment = expensesFragmentPagerPagerAdapter.getItem(0);
-                    case 1:
-                        Fragment expenseLitFragment = expensesFragmentPagerPagerAdapter.getItem(1);
-                        getSupportFragmentManager().beginTransaction().detach(expenseLitFragment).attach(expenseLitFragment).commit();
-                        break;
-                }
-
-                Snackbar.make(view, "Complete button handling action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        fab.setOnClickListener(view -> {
+            switch (tabs.getSelectedTabPosition()) {
+                case 0:
+                    Fragment addExpenseFragment = expensesFragmentPagerPagerAdapter.getItem(0);
+                case 1:
+                    Fragment expenseLitFragment = expensesFragmentPagerPagerAdapter.getItem(1);
+                    getSupportFragmentManager().beginTransaction().detach(expenseLitFragment).attach(expenseLitFragment).commit();
+                    break;
             }
+
+            Snackbar.make(view, "Complete button handling action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         });
 
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);

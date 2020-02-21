@@ -1,6 +1,5 @@
 package com.pyskacz.android.myexpenses.ui.utils;
 
-import android.content.Context;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;

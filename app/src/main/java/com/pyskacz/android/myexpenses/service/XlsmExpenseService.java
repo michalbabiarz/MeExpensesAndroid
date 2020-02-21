@@ -2,6 +2,7 @@ package com.pyskacz.android.myexpenses.service;
 
 import com.pyskacz.android.myexpenses.model.Configuration;
 import com.pyskacz.android.myexpenses.model.Expense;
+import com.pyskacz.android.myexpenses.utils.NumberUtils;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -15,8 +16,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class XlsmExpenseService implements IExpenseService {
     private static final int FIRST_EXPENSE_ROW = 7;
@@ -26,6 +25,7 @@ public class XlsmExpenseService implements IExpenseService {
     private static final boolean WRITE_FILE = true;
     private static final boolean NO_WRITE_FILE = false;
 
+    private static final DecimalFormat AMOUNT_FORMAT = new DecimalFormat(".00");
     private Configuration configuration = new Configuration();
 
     @Override
@@ -36,18 +36,10 @@ public class XlsmExpenseService implements IExpenseService {
             for (int i = FIRST_EXPENSE_ROW; !sheet.getRow(i).getCell(FIRST_DATA_COLUMN).toString().isEmpty(); i++) {
                 Row row = sheet.getRow(i);
                 String[] expenseParams = new String[NUMBER_OF_SIGNIFICANT_COLLUMNS];
-                Pattern pattern = Pattern.compile("([+-]?)(\\d+)(\\.\\d{1,2})?");
                 for (int j = FIRST_DATA_COLUMN, k = 0; j < FIRST_DATA_COLUMN + NUMBER_OF_SIGNIFICANT_COLLUMNS; j++, k++) {
                     String data = row.getCell(j).toString();
                     if (j == (FIRST_DATA_COLUMN + 1)) {
-                        double sum = 0.0;
-                        Matcher matcher = pattern.matcher(data);
-                        while (matcher.find()) {
-                            String group = matcher.group();
-                            sum += Double.parseDouble(group);
-                        }
-
-                        data = new DecimalFormat(".00").format(sum);
+                       data = NumberUtils.sumUpStringDoubleValuesAndFormat(data, AMOUNT_FORMAT);
                     }
                     expenseParams[k] = data;
                 }

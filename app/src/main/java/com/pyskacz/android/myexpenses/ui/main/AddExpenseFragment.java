@@ -1,6 +1,5 @@
 package com.pyskacz.android.myexpenses.ui.main;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,11 +54,11 @@ public class AddExpenseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Activity context = getActivity();
-        EditText amountInputEditText = context.findViewById(R.id.amountInput);
+        EditText amountInputEditText = getActivity().findViewById(R.id.amountInput);
         amountInputEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -67,7 +66,8 @@ public class AddExpenseFragment extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 }

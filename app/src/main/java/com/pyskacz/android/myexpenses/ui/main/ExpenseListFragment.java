@@ -1,6 +1,5 @@
 package com.pyskacz.android.myexpenses.ui.main;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,13 +27,13 @@ import java.util.HashMap;
 
 public class ExpenseListFragment extends ListFragment {
 
+    //TODO: refactor this
     private IExpenseService expenseService = new XlsmExpenseService();
 
     @Override
     public void onActivityCreated(@NonNull Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         try {
-            Activity context = getActivity();
             ArrayList<HashMap<String, String>> expensesList = new ArrayList<>();
             Collection<Expense> expenses = expenseService.findAllExpenses();
             StringBuilder sb = new StringBuilder();
