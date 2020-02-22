@@ -11,10 +11,16 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.pyskacz.android.myexpenses.ui.main.DataLoadingDialogFragment;
 import com.pyskacz.android.myexpenses.ui.main.ExpensesFragmentPagerAdapter;
+
+import org.apache.xmlbeans.XmlSaxHandler;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,9 +54,16 @@ public class MainActivity extends AppCompatActivity {
             switch (tabs.getSelectedTabPosition()) {
                 case 0:
                     Fragment addExpenseFragment = expensesFragmentPagerPagerAdapter.getItem(0);
+                    break;
                 case 1:
                     Fragment expenseLitFragment = expensesFragmentPagerPagerAdapter.getItem(1);
-                    getSupportFragmentManager().beginTransaction().detach(expenseLitFragment).attach(expenseLitFragment).commit();
+                    try {
+                        XlsmHandler.getInstance().reload();
+                    } catch (IOException e) {
+                        //TODO: fix it
+                        e.printStackTrace();
+                    }
+//                    getSupportFragmentManager().beginTransaction().detach(expenseLitFragment).attach(expenseLitFragment).commit();
                     break;
             }
 

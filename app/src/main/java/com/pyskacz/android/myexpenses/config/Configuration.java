@@ -1,4 +1,6 @@
-package com.pyskacz.android.myexpenses.model;
+package com.pyskacz.android.myexpenses.config;
+
+import java.util.Objects;
 
 import lombok.Getter;
 
@@ -10,5 +12,17 @@ public class Configuration {
     public String workbookFileLocation = DEFAULT_WORKBOOK_FILE_PATH;
     //public DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
 
-    public Configuration(){}
+    private static Configuration instance;
+
+    private Configuration() {
+    }
+
+    public static Configuration getInstance() {
+        if (Objects.isNull(instance)) {
+            instance = new Configuration();
+        }
+
+        return instance;
+    }
+
 }

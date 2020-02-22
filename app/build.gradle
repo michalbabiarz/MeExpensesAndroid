@@ -56,4 +56,7 @@ dependencies {
     // Include supported authentication methods for your application
     implementation ('com.microsoft.services.msa:msa-auth:0.8.+')
     implementation ('com.microsoft.aad:adal:1.1.+')
+
+    // https://mvnrepository.com/artifact/com.afollestad/material-dialogs
+    //implementation 'com.afollestad.material-dialogs.core:2.6.0'
 }

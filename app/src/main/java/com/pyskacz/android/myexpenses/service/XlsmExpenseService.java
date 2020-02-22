@@ -1,32 +1,26 @@
 package com.pyskacz.android.myexpenses.service;
 
-import com.pyskacz.android.myexpenses.model.Configuration;
+import com.pyskacz.android.myexpenses.XlsmHandler;
 import com.pyskacz.android.myexpenses.model.Expense;
 import com.pyskacz.android.myexpenses.utils.NumberUtils;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class XlsmExpenseService implements IExpenseService {
+public class XlsmExpenseService implements IExpenseService{
     private static final int FIRST_EXPENSE_ROW = 7;
     private static final int FIRST_DATA_COLUMN = 1;
-    private static final int NUMBER_OF_SIGNIFICANT_COLLUMNS = 6;
+    private static final int NUMBER_OF_SIGNIFICANT_COLUMNS = 6;
 
     private static final boolean WRITE_FILE = true;
     private static final boolean NO_WRITE_FILE = false;
 
     private static final DecimalFormat AMOUNT_FORMAT = new DecimalFormat(".00");
-    private Configuration configuration = new Configuration();
 
     @Override
     public List<Expense> findAllExpenses() throws ExpenseServiceException {
@@ -35,8 +29,8 @@ public class XlsmExpenseService implements IExpenseService {
 
             for (int i = FIRST_EXPENSE_ROW; !sheet.getRow(i).getCell(FIRST_DATA_COLUMN).toString().isEmpty(); i++) {
                 Row row = sheet.getRow(i);
-                String[] expenseParams = new String[NUMBER_OF_SIGNIFICANT_COLLUMNS];
-                for (int j = FIRST_DATA_COLUMN, k = 0; j < FIRST_DATA_COLUMN + NUMBER_OF_SIGNIFICANT_COLLUMNS; j++, k++) {
+                String[] expenseParams = new String[NUMBER_OF_SIGNIFICANT_COLUMNS];
+                for (int j = FIRST_DATA_COLUMN, k = 0; j < FIRST_DATA_COLUMN + NUMBER_OF_SIGNIFICANT_COLUMNS; j++, k++) {
                     String data = row.getCell(j).toString();
                     if (j == (FIRST_DATA_COLUMN + 1)) {
                        data = NumberUtils.sumUpStringDoubleValuesAndFormat(data, AMOUNT_FORMAT);
@@ -81,22 +75,17 @@ public class XlsmExpenseService implements IExpenseService {
     private List<Expense> performSheetOperation(Function<Sheet, List<Expense>> function, boolean writeFile) throws ExpenseServiceException {
 
         try {
-            InputStream in = new BufferedInputStream(new FileInputStream(configuration.workbookFileLocation), 1024);
-            Workbook wb = new XSSFWorkbook(in);
+
+            XlsmHandler xlsmHandler = XlsmHandler.getInstance();
             String currentMonthSheetName = com.pyskacz.android.myexpenses.enums.Sheet.CURRENT_MONTH.getName();
-            Sheet sheet = wb.getSheet(currentMonthSheetName);
+            Sheet sheet = xlsmHandler.getSheet(currentMonthSheetName);
             if (null == sheet.getSheetName()) {
                 throw new ExpenseServiceException("\"" + currentMonthSheetName + "\" sheet NOT found. Please add it in the desktop app");
             }
 
             List<Expense> expenses = function.apply(sheet);
-            in.close();
 
-            if (writeFile) {
-                try (FileOutputStream out = new FileOutputStream(configuration.workbookFileLocation)) {
-                    wb.write(out);
-                }
-            }
+            if (writeFile) xlsmHandler.write();
 
             return expenses;
 
